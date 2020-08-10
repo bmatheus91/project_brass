@@ -25,7 +25,7 @@ void main() {
     when(mockRepository.getConcreteNumberTrivia(any))
         .thenAnswer((_) async => mockNumberTrivia);
 
-    final response = await useCase(number: number);
+    final response = await useCase(Params(number: number));
 
     expect(response, mockNumberTrivia);
     verify(mockRepository.getConcreteNumberTrivia(number));
@@ -36,7 +36,7 @@ void main() {
     when(mockRepository.getConcreteNumberTrivia(any))
         .thenAnswer((_) async => mockNumberTrivia);
 
-    final response = await useCase(number: number);
+    final response = await useCase(Params(number: number));
 
     expect(response, mockNumberTrivia);
     verify(mockRepository.getConcreteNumberTrivia(number));
