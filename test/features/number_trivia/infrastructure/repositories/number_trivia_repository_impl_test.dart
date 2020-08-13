@@ -102,5 +102,28 @@ void main() {
             throwsA(ServerFailure()));
       });
     });
+
+    runTestsOffline(() {
+      test(
+          'should return last locally cached data when the cached data is present',
+          () async {
+        when(localDataSource.getLastNumberTrivia())
+            .thenAnswer((_) async => model);
+
+        final response = await repository.getConcreteNumberTrivia(number);
+
+        verifyZeroInteractions(remoteDataSource);
+        verify(localDataSource.getLastNumberTrivia());
+        expect(response, equals(trivia));
+      });
+
+      test('should return CacheFailure when there is no cached data present',
+          () async {
+        when(localDataSource.getLastNumberTrivia()).thenThrow(CacheException());
+
+        expect(() async => await repository.getConcreteNumberTrivia(number),
+            throwsA(CacheFailure()));
+      });
+    });
   });
 }
