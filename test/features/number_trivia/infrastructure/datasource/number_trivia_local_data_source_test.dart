@@ -35,7 +35,7 @@ void main() {
 
       final result = await localDataSource.getLastNumberTrivia();
 
-      verify(sharedPreferences.getString('CACHED_NUMBER_TRIVIA'));
+      verify(sharedPreferences.getString(CACHED_NUMBER_TRIVIA));
       expect(result, equals(model));
     });
 
@@ -45,6 +45,19 @@ void main() {
 
       expect(() async => await localDataSource.getLastNumberTrivia(),
           throwsA(TypeMatcher<CacheException>()));
+    });
+  });
+
+  group('cacheNumberTrivia', () {
+    final model =
+        NumberTriviaModel.fromJson(json.decode(fixture('trivia_cached.json')));
+
+    test('should call SharedPreferences to cache the data', () async {
+      localDataSource.cacheNumberTrivia(model);
+
+      final expectedJson = json.encode(model.toJson());
+
+      verify(sharedPreferences.setString(CACHED_NUMBER_TRIVIA, expectedJson));
     });
   });
 }
