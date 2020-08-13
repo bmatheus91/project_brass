@@ -126,4 +126,76 @@ void main() {
       });
     });
   });
+
+  group('getRandomNumberTrivia', () {
+    final model = NumberTriviaModel(number: 321, text: 'Trivia');
+    final NumberTrivia trivia = model;
+
+    test('should check if the device is online', () async {
+      when(networkInfo.isConnected).thenAnswer((_) async => true);
+
+      repository.getRandomNumberTrivia();
+
+      verify(networkInfo.isConnected);
+    });
+
+    runTestsOnline(() {
+      test(
+          'should return remote data when the call to remote data source is successful',
+          () async {
+        when(remoteDataSource.getRandomNumberTrivia())
+            .thenAnswer((_) async => model);
+
+        final response = await repository.getRandomNumberTrivia();
+
+        verify(remoteDataSource.getRandomNumberTrivia());
+        expect(response, equals(trivia));
+      });
+
+      test(
+          'should cache the data locally when the call to remote data source is successful',
+          () async {
+        when(remoteDataSource.getRandomNumberTrivia())
+            .thenAnswer((_) async => model);
+
+        await repository.getRandomNumberTrivia();
+
+        verify(remoteDataSource.getRandomNumberTrivia());
+        verify(localDataSource.cacheNumberTrivia(model));
+      });
+
+      test(
+          'should return server failure when the call to remote data source is unsuccessful',
+          () async {
+        when(remoteDataSource.getRandomNumberTrivia())
+            .thenThrow(ServerException());
+
+        expect(() async => await repository.getRandomNumberTrivia(),
+            throwsA(ServerFailure()));
+      });
+    });
+
+    runTestsOffline(() {
+      test(
+          'should return last locally cached data when the cached data is present',
+          () async {
+        when(localDataSource.getLastNumberTrivia())
+            .thenAnswer((_) async => model);
+
+        final response = await repository.getRandomNumberTrivia();
+
+        verifyZeroInteractions(remoteDataSource);
+        verify(localDataSource.getLastNumberTrivia());
+        expect(response, equals(trivia));
+      });
+
+      test('should return CacheFailure when there is no cached data present',
+          () async {
+        when(localDataSource.getLastNumberTrivia()).thenThrow(CacheException());
+
+        expect(() async => await repository.getRandomNumberTrivia(),
+            throwsA(CacheFailure()));
+      });
+    });
+  });
 }
