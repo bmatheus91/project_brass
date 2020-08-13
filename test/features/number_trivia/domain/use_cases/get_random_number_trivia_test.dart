@@ -32,15 +32,4 @@ void main() {
     verify(mockRepository.getRandomNumberTrivia());
     verifyNoMoreInteractions(mockRepository);
   });
-
-  test('should throw Failure if fails', () async {
-    when(mockRepository.getRandomNumberTrivia())
-        .thenAnswer((_) async => mockNumberTrivia);
-
-    final response = await useCase(NoParams());
-
-    expect(response, mockNumberTrivia);
-    verify(mockRepository.getRandomNumberTrivia());
-    verifyNoMoreInteractions(mockRepository);
-  });
 }

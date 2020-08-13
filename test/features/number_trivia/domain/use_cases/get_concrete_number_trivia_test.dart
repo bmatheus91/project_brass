@@ -31,15 +31,4 @@ void main() {
     verify(mockRepository.getConcreteNumberTrivia(number));
     verifyNoMoreInteractions(mockRepository);
   });
-
-  test('should throw Failure if fails', () async {
-    when(mockRepository.getConcreteNumberTrivia(any))
-        .thenAnswer((_) async => mockNumberTrivia);
-
-    final response = await useCase(Params(number: number));
-
-    expect(response, mockNumberTrivia);
-    verify(mockRepository.getConcreteNumberTrivia(number));
-    verifyNoMoreInteractions(mockRepository);
-  });
 }
