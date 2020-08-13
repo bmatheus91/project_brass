@@ -1,4 +1,4 @@
-import '../../../../core/platform/network_info.dart';
+import '../../../../core/network/network_info.dart';
 import '../datasource/number_trivia_local_data_source.dart';
 import '../datasource/number_trivia_remote_data_source.dart';
 import '../../domain/entities/number_trivia.dart';
