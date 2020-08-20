@@ -3,7 +3,7 @@ import 'package:mockito/mockito.dart';
 
 import 'package:project_brass/core/error/exceptions.dart';
 import 'package:project_brass/core/error/failures.dart';
-import 'package:project_brass/core/platform/network_info.dart';
+import 'package:project_brass/core/network/network_info.dart';
 import 'package:project_brass/features/number_trivia/domain/entities/number_trivia.dart';
 import 'package:project_brass/features/number_trivia/infrastucture/datasource/number_trivia_local_data_source.dart';
 import 'package:project_brass/features/number_trivia/infrastucture/datasource/number_trivia_remote_data_source.dart';
