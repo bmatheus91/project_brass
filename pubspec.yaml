@@ -32,8 +32,8 @@ dependencies:
   http: ^0.12.2
   shared_preferences: ^0.5.8
   flutter_modular: ^1.3.2
-  mobx: ^1.2.1+1
-  flutter_mobx: ^1.1.0+1
+  bloc: ^6.0.2
+  flutter_bloc: ^6.0.1
   equatable: ^1.2.3
 
 
