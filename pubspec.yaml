@@ -29,7 +29,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
   data_connection_checker: ^0.3.4
-  dio: ^3.0.9
+  http: ^0.12.2
   shared_preferences: ^0.5.8
   flutter_modular: ^1.3.2
   mobx: ^1.2.1+1
