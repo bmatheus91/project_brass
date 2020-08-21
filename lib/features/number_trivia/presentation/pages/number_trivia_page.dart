@@ -32,6 +32,7 @@ class NumberTriviaPage extends StatelessWidget {
                 if (state is NumberTriviaInitial) {
                   return MessageDisplay(message: 'Start searching!');
                 } else if (state is NumberTriviaLoading) {
+                  return LoadingWidget();
                 } else if (state is NumberTriviaLoaded) {
                   return TriviaDisplay(trivia: state.trivia);
                 } else if (state is NumberTriviaError) {
