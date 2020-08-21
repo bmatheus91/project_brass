@@ -42,7 +42,7 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
         final response = await getConcreteNumberTrivia(Params(number: input));
 
         yield NumberTriviaLoaded(trivia: response);
-      } else if (event is GetRandomNumberTrivia) {
+      } else if (event is GetTriviaForRandomNumber) {
         yield NumberTriviaLoading();
 
         final response = await getRandomNumberTrivia(NoParams());
