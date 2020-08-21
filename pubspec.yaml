@@ -31,7 +31,7 @@ dependencies:
   data_connection_checker: ^0.3.4
   http: ^0.12.2
   shared_preferences: ^0.5.8
-  flutter_modular: ^1.3.2
+  get_it: ^4.0.4
   bloc: ^6.0.2
   flutter_bloc: ^6.0.1
   equatable: ^1.2.3
